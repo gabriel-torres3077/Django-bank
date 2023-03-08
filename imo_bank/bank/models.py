@@ -3,7 +3,7 @@ from .constants import TRANSACTION_TYPE, DEPOSIT, TRANSFER, WITHDRAW
 from user.models import User
 
 class Account(models.Model):
-    account_no = models.PositiveIntegerField(unique=True)
+    account_no = models.CharField(unique=True, max_length=10)
     user = models.OneToOneField(User, verbose_name="usuario", on_delete=models.CASCADE)
     balance = models.DecimalField(default=0, max_digits=12, decimal_places=2)
     initial_deposit_date = models.DateField(null=True, blank=True)

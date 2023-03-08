@@ -41,9 +41,9 @@ class LoginApi(views.APIView):
         user = services.user_email_selector(email=email)
 
         if user is None:
-            raise exceptions.AuthenticationFailed("Invalid Credentials")
+            raise exceptions.AuthenticationFailed("Credenciais Invalida")
         if not user.check_password(raw_password=password):
-            raise exceptions.AuthenticationFailed("Invalid Credentials")
+            raise exceptions.AuthenticationFailed("Credenciais Invalida")
         
         #generate access token
         token = services.create_token(user_id=user.id)
@@ -56,11 +56,6 @@ class LoginApi(views.APIView):
 
 
 class UserApi(views.APIView):
-    """
-    This endpoint can only be used
-    if the user is authenticated
-    """
-
     authentication_classes = (authentication.AuthBack,)
     permission_classes = (permissions.IsAuthenticated,)
 
@@ -79,7 +74,7 @@ class LogoutApi(views.APIView):
     def post(self, request):
         resp = response.Response()
         resp.delete_cookie("jwt")
-        resp.data = {"message": "so long farewell"}
+        resp.data = {"message": "Usário Saiu"}
 
         return resp
     
